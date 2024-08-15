@@ -1,0 +1,10 @@
+.DS_Store
+.expo
+.idea
+.vscode
+node_modules/
+dist/
+build/
+android/
+ios/
+babel.config.js
