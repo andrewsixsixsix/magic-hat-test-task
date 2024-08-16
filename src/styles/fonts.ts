@@ -6,11 +6,11 @@ export const fonts: TFonts = {
     fontWeight: "regular",
   },
   subtitle: {
-    fontSize: 24,
+    fontSize: 20,
     fontWeight: "semibold",
   },
   title: {
-    fontSize: 32,
+    fontSize: 28,
     fontWeight: "bold",
   },
 };
