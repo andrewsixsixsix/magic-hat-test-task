@@ -1,14 +1,12 @@
-import { Text } from "react-native";
 import { Tabs } from "expo-router";
 import { BottomTabNavigationOptions } from "@react-navigation/bottom-tabs";
 
 import { useColors } from "@/hooks";
-import { Button, TabBarIcon } from "@/components";
-import { IColorSet } from "@/styles/types";
+import { Button, TabBarIcon, ThemedText } from "@/components";
 
-const headerRight = (color: IColorSet[keyof IColorSet]) => (
+const headerRight = () => (
   <Button style={{ paddingRight: 20 }} onPress={() => {}}>
-    <Text style={{ color }}>Reset</Text>
+    <ThemedText>Reset</ThemedText>
   </Button>
 );
 
@@ -20,7 +18,7 @@ export default function HomeLayout() {
   const colors = useColors();
 
   const screenOptions: BottomTabNavigationOptions = {
-    headerRight: () => headerRight(colors.text),
+    headerRight: () => headerRight(),
     headerStyle: { backgroundColor: colors.main, shadowColor: colors.shadow },
     headerTitleAlign: "center",
     headerTitleStyle: { color: colors.text },
