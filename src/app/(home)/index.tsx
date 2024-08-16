@@ -16,6 +16,7 @@ import {
 } from "@/components";
 import { useColors } from "@/hooks";
 import { TColorSet } from "@/styles/types";
+import { useScoreActions } from "@/store/score";
 
 const gryffindor = require("@/assets/images/gryffindor.png");
 const hufflepuff = require("@/assets/images/hufflepuff.png");
@@ -25,6 +26,8 @@ const slytherin = require("@/assets/images/slytherin.png");
 export default function HomeTab() {
   const colors = useColors();
   const styles = getStyles(colors);
+
+  const { incrementSuccess, incrementFailed } = useScoreActions();
 
   const [isRefreshing, setIsRefreshing] = useState(false);
 

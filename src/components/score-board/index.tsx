@@ -2,11 +2,10 @@ import { StyleSheet, View } from "react-native";
 
 import { ThemedText } from "../themed-text";
 import { ThemedView } from "../themed-view";
+import { useScore } from "@/store/score";
 
 export const ScoreBoard = () => {
-  const total = 5;
-  const success = 4;
-  const failed = 1;
+  const { total, success, failed } = useScore();
 
   return (
     <ThemedView style={styles.container}>

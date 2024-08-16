@@ -3,9 +3,10 @@ import { BottomTabNavigationOptions } from "@react-navigation/bottom-tabs";
 
 import { useColors } from "@/hooks";
 import { Button, TabBarIcon, ThemedText } from "@/components";
+import { useScoreActions } from "@/store/score";
 
-const headerRight = () => (
-  <Button style={{ paddingRight: 20 }} onPress={() => {}}>
+const headerRight = (onPress: () => void) => (
+  <Button style={{ paddingRight: 20 }} onPress={onPress}>
     <ThemedText>Reset</ThemedText>
   </Button>
 );
@@ -16,9 +17,14 @@ const tabBarIcon = (name: string, isFocused: boolean) => (
 
 export default function HomeLayout() {
   const colors = useColors();
+  const { resetScore } = useScoreActions();
+
+  const reset = () => {
+    resetScore();
+  };
 
   const screenOptions: BottomTabNavigationOptions = {
-    headerRight: () => headerRight(),
+    headerRight: () => headerRight(reset),
     headerStyle: { backgroundColor: colors.main, shadowColor: colors.shadow },
     headerTitleAlign: "center",
     headerTitleStyle: { color: colors.text },
