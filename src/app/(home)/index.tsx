@@ -17,6 +17,8 @@ import {
 import { useColors } from "@/hooks";
 import { TColorSet } from "@/styles/types";
 import { useScoreActions } from "@/store/score";
+import { GuessResult, TCharacterHouse } from "@/types";
+import { useActiveCharacter, useCharacterActions } from "@/store/character";
 
 const gryffindor = require("@/assets/images/gryffindor.png");
 const hufflepuff = require("@/assets/images/hufflepuff.png");
@@ -27,15 +29,28 @@ export default function HomeTab() {
   const colors = useColors();
   const styles = getStyles(colors);
 
+  const activeCharacter = useActiveCharacter();
+  const { guessCharacterHouse } = useCharacterActions();
   const { incrementSuccess, incrementFailed } = useScoreActions();
 
   const [isRefreshing, setIsRefreshing] = useState(false);
 
   const onRefresh = () => {};
 
-  const onPress = () => {
+  const guess = (house: TCharacterHouse) => {
     if (isRefreshing) {
       return;
+    }
+    const guessResult = guessCharacterHouse(house);
+    switch (guessResult) {
+      case GuessResult.ALREADY_GUESSED:
+        return;
+      case GuessResult.SUCCESS:
+        incrementSuccess();
+        break;
+      case GuessResult.FAILED:
+        incrementFailed();
+        break;
     }
   };
 
@@ -50,38 +65,38 @@ export default function HomeTab() {
         }
       >
         <Image
-          src={"https://ik.imagekit.io/hpapi/harry.jpg"}
+          src={activeCharacter.image}
           resizeMode={"contain"}
           style={styles.characterImage}
         />
-        <ThemedText type={"title"}>Harry Potter</ThemedText>
+        <ThemedText type={"title"}>{activeCharacter.name}</ThemedText>
       </ScrollView>
       <View style={styles.buttons}>
         <View style={styles.buttonsRow}>
           <HouseButton
             source={gryffindor}
             title={"Gryffindor"}
-            onPress={onPress}
+            onPress={() => guess("Gryffindor")}
           />
           <HouseButton
             source={slytherin}
             title={"Slytherin"}
-            onPress={onPress}
+            onPress={() => guess("Slytherin")}
           />
         </View>
         <View style={styles.buttonsRow}>
           <HouseButton
             source={ravenclaw}
             title={"Ravenclaw"}
-            onPress={onPress}
+            onPress={() => guess("Ravenclaw")}
           />
           <HouseButton
             source={hufflepuff}
             title={"Hufflepuff"}
-            onPress={onPress}
+            onPress={() => guess("Hufflepuff")}
           />
         </View>
-        <Button style={styles.notInHouseButton} onPress={onPress}>
+        <Button style={styles.notInHouseButton} onPress={() => guess("")}>
           <ThemedText type={"subtitle"}>Not in house</ThemedText>
         </Button>
       </View>
