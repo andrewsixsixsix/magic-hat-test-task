@@ -4,14 +4,16 @@ type Theme = "dark" | "light";
 
 export type TColorSet = {
   accent: string;
+  green: string;
   main: string;
+  red: string;
   shadow: string;
   text: string;
 };
 
 export type TColors = Record<Theme, TColorSet>;
 
-export type TFontType = "default" | "subtitle" | "title";
+export type TFontType = "caption" | "default" | "subtitle" | "title";
 
 export type TFont = {
   fontSize: TextStyle["fontSize"];
