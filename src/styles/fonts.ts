@@ -1,20 +1,21 @@
 import { TFonts } from "@/styles/types";
+import { sf } from "@/utils";
 
 export const fonts: TFonts = {
   caption: {
-    fontSize: 14,
+    fontSize: sf(14),
     fontWeight: "regular",
   },
   default: {
-    fontSize: 16,
+    fontSize: sf(16),
     fontWeight: "regular",
   },
   subtitle: {
-    fontSize: 20,
+    fontSize: sf(20),
     fontWeight: "semibold",
   },
   title: {
-    fontSize: 28,
+    fontSize: sf(28),
     fontWeight: "bold",
   },
 };

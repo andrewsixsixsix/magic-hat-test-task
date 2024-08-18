@@ -1,6 +1,7 @@
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 
 import { useColors } from "@/hooks";
+import { sw } from "@/utils";
 
 interface TabBarIconProps {
   isFocused: boolean;
@@ -13,7 +14,7 @@ export const TabBarIcon = ({ isFocused, name }: TabBarIconProps) => {
   return (
     <FontAwesome5
       name={name}
-      size={24}
+      size={sw(24)}
       color={isFocused ? colors.accent : colors.text}
     />
   );

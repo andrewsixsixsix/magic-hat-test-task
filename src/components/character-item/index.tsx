@@ -9,6 +9,7 @@ import { Button } from "../button";
 import { ThemedText } from "../themed-text";
 import { TColorSet } from "@/styles/types";
 import { DEFAULT_CHARACTER_IMAGE } from "@/constants";
+import { sh, sw } from "@/utils";
 
 interface CharacterItemProps {
   character: ICharacter;
@@ -41,15 +42,15 @@ export const CharacterItem = memo(
         </View>
       </Button>
       {character.isGuessed ? (
-        <Ionicons name="checkmark-circle" size={24} color={colors.green} />
+        <Ionicons name="checkmark-circle" size={sw(24)} color={colors.green} />
       ) : (
         <View style={styles.icons}>
           {isActive ? null : (
             <Button onPress={() => onReloadPress(character)}>
-              <Ionicons name="reload" size={24} color={colors.accent} />
+              <Ionicons name="reload" size={sw(24)} color={colors.accent} />
             </Button>
           )}
-          <Entypo name="circle-with-cross" size={24} color={colors.red} />
+          <Entypo name="circle-with-cross" size={sw(24)} color={colors.red} />
         </View>
       )}
     </View>
@@ -65,16 +66,16 @@ const styles = StyleSheet.create({
   },
   icons: {
     flexDirection: "row",
-    gap: 12,
+    gap: sw(12),
   },
   image: {
-    height: 50,
-    width: 50,
+    height: sh(50),
+    width: sw(50),
   },
   info: {
     alignItems: "center",
     flex: 1,
     flexDirection: "row",
-    gap: 12,
+    gap: sw(12),
   },
 });

@@ -5,6 +5,7 @@ import { Button } from "../button";
 import { ThemedText } from "../themed-text";
 import { TColorSet } from "@/styles/types";
 import { useColors } from "@/hooks";
+import { sh, sw } from "@/utils";
 
 interface HouseButtonProps extends PressableProps {
   source: ImageProps["source"];
@@ -33,14 +34,14 @@ const getStyles = (colors: TColorSet) =>
     button: {
       alignItems: "center",
       borderColor: colors.accent,
-      borderRadius: 8,
-      borderWidth: 2,
+      borderRadius: sw(8),
+      borderWidth: sw(2),
       flex: 1,
-      paddingHorizontal: 20,
-      paddingVertical: 12,
+      paddingHorizontal: sw(20),
+      paddingVertical: sh(12),
     },
     logo: {
-      width: 60,
-      height: 60,
+      width: sw(60),
+      height: sh(60),
     },
   });

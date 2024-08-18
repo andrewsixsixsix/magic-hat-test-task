@@ -7,6 +7,7 @@ import { ICharacter } from "@/types";
 import { useColors } from "@/hooks";
 import { TColorSet } from "@/styles/types";
 import { DEFAULT_CHARACTER_IMAGE } from "@/constants";
+import { sh, sw } from "@/utils";
 
 export default function DetailsScreen() {
   const colors = useColors();
@@ -55,14 +56,14 @@ const getStyles = (colors: TColorSet) =>
   StyleSheet.create({
     accessDenied: {
       borderColor: colors.red,
-      borderRadius: 8,
+      borderRadius: sw(8),
       borderWidth: 1,
       color: colors.red,
-      paddingHorizontal: 16,
-      paddingVertical: 12,
+      paddingHorizontal: sw(16),
+      paddingVertical: sh(12),
     },
     bio: {
-      gap: 12,
+      gap: sh(12),
     },
     bioContainer: {
       alignItems: "center",
@@ -70,15 +71,15 @@ const getStyles = (colors: TColorSet) =>
       flexShrink: 1,
     },
     container: {
-      paddingVertical: 24,
-      paddingHorizontal: 20,
+      paddingVertical: sh(24),
+      paddingHorizontal: sw(20),
     },
     image: {
       width: "40%",
       justifyContent: "flex-start",
     },
     info: {
-      minHeight: 150,
+      minHeight: sh(150),
       flexDirection: "row",
     },
   });

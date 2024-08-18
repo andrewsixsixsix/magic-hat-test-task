@@ -3,8 +3,13 @@ import { StyleSheet, View } from "react-native";
 import { ThemedText } from "../themed-text";
 import { ThemedView } from "../themed-view";
 import { useScore } from "@/store/score";
+import { TColorSet } from "@/styles/types";
+import { useColors } from "@/hooks";
+import { sh, sw } from "@/utils";
 
 export const ScoreBoard = () => {
+  const colors = useColors();
+  const styles = getStyles(colors);
   const { total, success, failed } = useScore();
 
   return (
@@ -25,19 +30,20 @@ export const ScoreBoard = () => {
   );
 };
 
-const styles = StyleSheet.create({
-  box: {
-    alignItems: "center",
-    borderColor: "gray",
-    borderRadius: 8,
-    borderWidth: 1,
-    gap: 8,
-    paddingHorizontal: 20,
-    paddingVertical: 12,
-  },
-  container: {
-    flex: 0,
-    flexDirection: "row",
-    justifyContent: "space-between",
-  },
-});
+const getStyles = (colors: TColorSet) =>
+  StyleSheet.create({
+    box: {
+      alignItems: "center",
+      borderColor: colors.gray,
+      borderRadius: sw(8),
+      borderWidth: 1,
+      gap: sh(8),
+      paddingHorizontal: sw(20),
+      paddingVertical: sh(12),
+    },
+    container: {
+      flex: 0,
+      flexDirection: "row",
+      justifyContent: "space-between",
+    },
+  });

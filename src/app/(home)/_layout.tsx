@@ -5,9 +5,10 @@ import { useColors } from "@/hooks";
 import { Button, TabBarIcon, ThemedText } from "@/components";
 import { useScoreActions } from "@/store/score";
 import { useCharacterActions } from "@/store/character";
+import { sw } from "@/utils";
 
 const headerRight = (onPress: () => void, color: string) => (
-  <Button style={{ paddingRight: 20 }} onPress={onPress}>
+  <Button style={{ paddingRight: sw(20) }} onPress={onPress}>
     <ThemedText style={{ color }}>Reset</ThemedText>
   </Button>
 );

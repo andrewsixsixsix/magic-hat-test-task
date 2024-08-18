@@ -10,6 +10,7 @@ import {
 } from "@/store/character";
 import { ICharacter } from "@/types";
 import { useColors } from "@/hooks";
+import { sh, sw } from "@/utils";
 
 export default function ListTab() {
   const colors = useColors();
@@ -88,17 +89,17 @@ export default function ListTab() {
 
 const styles = StyleSheet.create({
   container: {
-    gap: 20,
-    paddingTop: 24,
+    gap: sh(20),
+    paddingTop: sh(24),
   },
   header: {
-    gap: 20,
-    paddingHorizontal: 20,
+    gap: sh(20),
+    paddingHorizontal: sw(20),
   },
   list: {
-    paddingHorizontal: 20,
+    paddingHorizontal: sh(20),
   },
   separator: {
-    height: 20,
+    height: sh(20),
   },
 });

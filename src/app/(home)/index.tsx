@@ -15,6 +15,7 @@ import { useScoreActions } from "@/store/score";
 import { GuessResult, TCharacterHouse } from "@/types";
 import { useActiveCharacter, useCharacterActions } from "@/store/character";
 import { DEFAULT_CHARACTER_IMAGE } from "@/constants";
+import { sh, sw } from "@/utils";
 
 const gryffindor = require("@/assets/images/gryffindor.png");
 const hufflepuff = require("@/assets/images/hufflepuff.png");
@@ -108,11 +109,11 @@ export default function HomeTab() {
 const getStyles = (colors: TColorSet) =>
   StyleSheet.create({
     buttons: {
-      gap: 12,
+      gap: sh(12),
     },
     buttonsRow: {
       flexDirection: "row",
-      gap: 12,
+      gap: sw(12),
       justifyContent: "space-between",
     },
     character: {
@@ -121,18 +122,18 @@ const getStyles = (colors: TColorSet) =>
       justifyContent: "center",
     },
     characterImage: {
-      height: 150,
+      height: sh(150),
       width: "100%",
     },
     container: {
-      paddingHorizontal: 20,
-      paddingVertical: 24,
+      paddingHorizontal: sw(20),
+      paddingVertical: sh(24),
     },
     notInHouseButton: {
       alignItems: "center",
       borderColor: colors.accent,
-      borderRadius: 8,
-      borderWidth: 2,
-      paddingVertical: 12,
+      borderRadius: sw(8),
+      borderWidth: sw(2),
+      paddingVertical: sh(12),
     },
   });

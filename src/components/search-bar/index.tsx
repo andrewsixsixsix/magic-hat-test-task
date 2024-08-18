@@ -3,6 +3,7 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 
 import { TColorSet } from "@/styles/types";
 import { useColors } from "@/hooks";
+import { sh, sw } from "@/utils";
 
 interface ISearchBarProps extends TextInputProps {}
 
@@ -21,7 +22,7 @@ export const SearchBar = ({ placeholder, ...props }: ISearchBarProps) => {
       />
       <Ionicons
         name={"search"}
-        size={20}
+        size={sw(20)}
         color={colors.gray}
         style={styles.icon}
       />
@@ -34,18 +35,18 @@ const getStyles = (colors: TColorSet) =>
     container: {
       alignItems: "center",
       borderColor: colors.gray,
-      borderRadius: 8,
+      borderRadius: sw(8),
       borderWidth: 1,
       flexDirection: "row",
-      paddingHorizontal: 10,
+      paddingHorizontal: sw(10),
       width: "100%",
     },
     input: {
       flex: 1,
-      paddingVertical: 12,
+      paddingVertical: sh(12),
       color: colors.text,
     },
     icon: {
-      paddingLeft: 10,
+      paddingLeft: sw(10),
     },
   });
