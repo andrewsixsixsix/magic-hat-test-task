@@ -109,7 +109,6 @@ const getStyles = (colors: TColorSet) =>
   StyleSheet.create({
     buttons: {
       gap: 12,
-      marginHorizontal: 20,
     },
     buttonsRow: {
       flexDirection: "row",
@@ -126,6 +125,7 @@ const getStyles = (colors: TColorSet) =>
       width: "100%",
     },
     container: {
+      paddingHorizontal: 20,
       paddingVertical: 24,
     },
     notInHouseButton: {
@@ -133,7 +133,6 @@ const getStyles = (colors: TColorSet) =>
       borderColor: colors.accent,
       borderRadius: 8,
       borderWidth: 2,
-      paddingHorizontal: 20,
       paddingVertical: 12,
     },
   });

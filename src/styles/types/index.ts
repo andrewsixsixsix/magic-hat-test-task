@@ -4,6 +4,7 @@ type Theme = "dark" | "light";
 
 export type TColorSet = {
   accent: string;
+  gray: string;
   green: string;
   main: string;
   red: string;

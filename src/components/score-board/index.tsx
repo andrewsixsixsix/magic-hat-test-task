@@ -38,6 +38,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 0,
     flexDirection: "row",
-    justifyContent: "space-evenly",
+    justifyContent: "space-between",
   },
 });

@@ -1,8 +1,8 @@
-import { useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { FlatList, StyleSheet, View } from "react-native";
 import { router } from "expo-router";
 
-import { CharacterItem, ScoreBoard, ThemedView } from "@/components";
+import { CharacterItem, ScoreBoard, SearchBar, ThemedView } from "@/components";
 import {
   useActiveCharacter,
   useCharacterActions,
@@ -16,6 +16,30 @@ export default function ListTab() {
   const activeCharacter = useActiveCharacter();
   const guessedCharacters = useGuessedCharacters();
   const { setActiveCharacter } = useCharacterActions();
+
+  const [searchText, setSearchText] = useState("");
+  const [filteredCharacters, setFilteredCharacters] = useState<ICharacter[]>(
+    [],
+  );
+
+  useEffect(() => {
+    if (!guessedCharacters.length) {
+      setSearchText("");
+      setFilteredCharacters([]);
+    }
+  }, [guessedCharacters.length]);
+
+  const search = (text: string) => {
+    setSearchText(text);
+    if (!text) {
+      setFilteredCharacters([]);
+      return;
+    }
+    const filtered = guessedCharacters.filter((character) =>
+      character.name.toLowerCase().includes(text.toLowerCase()),
+    );
+    setFilteredCharacters(filtered);
+  };
 
   const toDetails = (character: ICharacter) =>
     router.navigate({
@@ -40,10 +64,20 @@ export default function ListTab() {
 
   return (
     <ThemedView style={styles.container}>
-      <ScoreBoard />
+      <View style={styles.header}>
+        <ScoreBoard />
+        <SearchBar
+          autoCorrect={false}
+          placeholder={"Filter characters..."}
+          value={searchText}
+          onChangeText={search}
+        />
+      </View>
       <FlatList
         contentContainerStyle={styles.list}
-        data={guessedCharacters}
+        data={
+          filteredCharacters.length ? filteredCharacters : guessedCharacters
+        }
         keyExtractor={(item) => item.id}
         ItemSeparatorComponent={separator}
         renderItem={renderItem}
@@ -54,8 +88,12 @@ export default function ListTab() {
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 24,
     gap: 20,
+    paddingTop: 24,
+  },
+  header: {
+    gap: 20,
+    paddingHorizontal: 20,
   },
   list: {
     paddingHorizontal: 20,
