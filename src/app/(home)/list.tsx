@@ -33,7 +33,7 @@ export default function ListTab() {
         onReloadPress={setActiveCharacter}
       />
     ),
-    [],
+    [activeCharacter.id],
   );
 
   const separator = useCallback(() => <View style={styles.separator} />, []);
@@ -54,7 +54,7 @@ export default function ListTab() {
 
 const styles = StyleSheet.create({
   container: {
-    paddingVertical: 24,
+    paddingTop: 24,
     gap: 20,
   },
   list: {

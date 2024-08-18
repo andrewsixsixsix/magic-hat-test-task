@@ -25,17 +25,17 @@ export default function DetailsScreen() {
           {character.isGuessed ? (
             <View style={styles.bio}>
               <ThemedText type={"subtitle"}>
-                House: <ThemedText>{character.house ?? "—"}</ThemedText>
+                House: <ThemedText>{character.house || "-"}</ThemedText>
               </ThemedText>
               <ThemedText type={"subtitle"}>
                 {"Date of birth: "}
-                <ThemedText>{character.dateOfBirth ?? "—"}</ThemedText>
+                <ThemedText>{character.dateOfBirth ?? "-"}</ThemedText>
               </ThemedText>
               <ThemedText type={"subtitle"}>
-                Actor: <ThemedText>{character.actor}</ThemedText>
+                Actor: <ThemedText>{character.actor || "-"}</ThemedText>
               </ThemedText>
               <ThemedText type={"subtitle"}>
-                Patronus: <ThemedText>{character.patronus ?? "—"}</ThemedText>
+                Patronus: <ThemedText>{character.patronus || "-"}</ThemedText>
               </ThemedText>
             </View>
           ) : (
