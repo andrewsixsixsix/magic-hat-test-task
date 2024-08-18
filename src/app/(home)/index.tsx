@@ -1,11 +1,6 @@
 import { useState } from "react";
-import {
-  Image,
-  RefreshControl,
-  ScrollView,
-  StyleSheet,
-  View,
-} from "react-native";
+import { RefreshControl, ScrollView, StyleSheet, View } from "react-native";
+import { Image } from "expo-image";
 
 import {
   Button,
@@ -19,6 +14,7 @@ import { TColorSet } from "@/styles/types";
 import { useScoreActions } from "@/store/score";
 import { GuessResult, TCharacterHouse } from "@/types";
 import { useActiveCharacter, useCharacterActions } from "@/store/character";
+import { DEFAULT_CHARACTER_IMAGE } from "@/constants";
 
 const gryffindor = require("@/assets/images/gryffindor.png");
 const hufflepuff = require("@/assets/images/hufflepuff.png");
@@ -70,8 +66,8 @@ export default function HomeTab() {
         }
       >
         <Image
-          src={activeCharacter.image}
-          resizeMode={"contain"}
+          source={activeCharacter.image || DEFAULT_CHARACTER_IMAGE}
+          contentFit={"contain"}
           style={styles.characterImage}
         />
         <ThemedText type={"title"}>{activeCharacter.name}</ThemedText>
@@ -127,7 +123,7 @@ const getStyles = (colors: TColorSet) =>
     },
     characterImage: {
       height: 150,
-      width: 100,
+      width: "100%",
     },
     container: {
       paddingVertical: 24,

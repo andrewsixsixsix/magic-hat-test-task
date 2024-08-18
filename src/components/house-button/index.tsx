@@ -1,4 +1,5 @@
-import { Image, ImageProps, PressableProps, StyleSheet } from "react-native";
+import { PressableProps, StyleSheet } from "react-native";
+import { Image, ImageProps } from "expo-image";
 
 import { Button } from "../button";
 import { ThemedText } from "../themed-text";
@@ -21,7 +22,7 @@ export const HouseButton = ({
 
   return (
     <Button onPress={onPress} {...props} style={styles.button}>
-      <Image source={source} resizeMode={"contain"} style={styles.logo} />
+      <Image source={source} contentFit={"contain"} style={styles.logo} />
       <ThemedText type={"subtitle"}>{title}</ThemedText>
     </Button>
   );

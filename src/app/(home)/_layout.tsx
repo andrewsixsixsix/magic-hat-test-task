@@ -6,9 +6,9 @@ import { Button, TabBarIcon, ThemedText } from "@/components";
 import { useScoreActions } from "@/store/score";
 import { useCharacterActions } from "@/store/character";
 
-const headerRight = (onPress: () => void) => (
+const headerRight = (onPress: () => void, color: string) => (
   <Button style={{ paddingRight: 20 }} onPress={onPress}>
-    <ThemedText>Reset</ThemedText>
+    <ThemedText style={{ color }}>Reset</ThemedText>
   </Button>
 );
 
@@ -27,7 +27,7 @@ export default function HomeLayout() {
   };
 
   const screenOptions: BottomTabNavigationOptions = {
-    headerRight: () => headerRight(reset),
+    headerRight: () => headerRight(reset, colors.accent),
     headerStyle: { backgroundColor: colors.main, shadowColor: colors.shadow },
     headerTitleAlign: "center",
     headerTitleStyle: { color: colors.text },

@@ -1,10 +1,12 @@
-import { Image, StyleSheet, View } from "react-native";
+import { StyleSheet, View } from "react-native";
+import { Image } from "expo-image";
 
 import { ThemedText, ThemedView } from "@/components";
 import { Stack, useLocalSearchParams } from "expo-router";
 import { ICharacter } from "@/types";
 import { useColors } from "@/hooks";
 import { TColorSet } from "@/styles/types";
+import { DEFAULT_CHARACTER_IMAGE } from "@/constants";
 
 export default function DetailsScreen() {
   const colors = useColors();
@@ -17,8 +19,8 @@ export default function DetailsScreen() {
       <Stack.Screen options={{ headerTitle: character.name }} />
       <View style={styles.info}>
         <Image
-          resizeMode={"contain"}
-          src={character.image}
+          source={character.image || DEFAULT_CHARACTER_IMAGE}
+          contentFit={"contain"}
           style={styles.image}
         />
         <View style={styles.bioContainer}>
@@ -72,11 +74,11 @@ const getStyles = (colors: TColorSet) =>
       paddingHorizontal: 20,
     },
     image: {
-      height: 200,
-      width: 150,
+      width: "40%",
+      justifyContent: "flex-start",
     },
     info: {
+      minHeight: 150,
       flexDirection: "row",
-      gap: 16,
     },
   });

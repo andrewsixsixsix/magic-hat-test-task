@@ -1,12 +1,14 @@
 import { memo } from "react";
-import { Image, StyleSheet, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import Entypo from "@expo/vector-icons/Entypo";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import { Image } from "expo-image";
 
 import { ICharacter } from "@/types";
 import { Button } from "../button";
 import { ThemedText } from "../themed-text";
 import { TColorSet } from "@/styles/types";
+import { DEFAULT_CHARACTER_IMAGE } from "@/constants";
 
 interface CharacterItemProps {
   character: ICharacter;
@@ -27,8 +29,8 @@ export const CharacterItem = memo(
     <View style={styles.container}>
       <Button style={styles.info} onPress={onCharacterPress}>
         <Image
-          src={character.image}
-          resizeMode={"contain"}
+          source={character.image || DEFAULT_CHARACTER_IMAGE}
+          contentFit={"contain"}
           style={styles.image}
         />
         <View>
