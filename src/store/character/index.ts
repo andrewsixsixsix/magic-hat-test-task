@@ -1,23 +1,21 @@
 import { create } from "zustand";
-import { GuessResult, ICharacter, TCharacterHouse } from "@/types";
 
-// default character to avoid null checks
-const HARRY_POTTER: ICharacter = {
-  id: "9e3f7ce4-b9a7-4244-b709-dae5c1f1d4a8",
-  name: "Harry Potter",
-  house: "Gryffindor",
-  dateOfBirth: "31-07-1980",
-  patronus: "stag",
-  actor: "Daniel Radcliffe",
-  image: "https://ik.imagekit.io/hpapi/harry.jpg",
-  attempts: 0,
-  isGuessed: false,
-};
+import {
+  GuessResult,
+  ICharacter,
+  TCharacterHouse,
+  TCharacterId,
+} from "@/types";
+import { characterService } from "@/services";
+import { HARRY_POTTER } from "@/constants";
 
 interface ICharacterStore {
   activeCharacter: ICharacter;
+  characterIds: TCharacterId[];
   guessedCharacters: ICharacter[];
   actions: {
+    getCharacterIds: () => void;
+    getRandomCharacter: () => Promise<void>;
     guessCharacterHouse: (house: TCharacterHouse) => GuessResult;
     resetGuessedCharacters: () => void;
     setActiveCharacter: (character: ICharacter) => void;
@@ -26,31 +24,51 @@ interface ICharacterStore {
 
 const useCharacterStore = create<ICharacterStore>((set, get) => ({
   activeCharacter: { ...HARRY_POTTER },
+  characterIds: [],
   guessedCharacters: [],
   actions: {
+    getCharacterIds: async () => {
+      const characters = await characterService.fetchAll();
+      const ids = characters.map((c) => c.id);
+      set({ characterIds: ids });
+    },
+    getRandomCharacter: async () => {
+      let character = HARRY_POTTER;
+      const ids = get().characterIds;
+
+      if (ids.length) {
+        const randomIndex = Math.floor(Math.random() * ids.length);
+        const id = ids[randomIndex];
+        character = await characterService.fetchById(id);
+      }
+
+      set({ activeCharacter: character });
+    },
     guessCharacterHouse: (house: TCharacterHouse) => {
       const activeCharacter = get().activeCharacter;
       const guessedCharacters = get().guessedCharacters;
 
-      if (activeCharacter.isGuessed) {
-        // TODO: set another active character
+      const character =
+        guessedCharacters.find((c) => c.id === activeCharacter.id) ??
+        activeCharacter;
+
+      if (character.isGuessed) {
         return GuessResult.ALREADY_GUESSED;
-      } else if (!activeCharacter.attempts) {
-        activeCharacter.attempts = 1;
+      } else if (!character.attempts) {
+        character.attempts = 1;
       } else {
-        activeCharacter.attempts += 1;
+        character.attempts += 1;
       }
 
-      const isGuessed = activeCharacter?.house === house;
-      activeCharacter.isGuessed = isGuessed;
+      const isGuessed = character?.house === house;
+      character.isGuessed = isGuessed;
 
-      const index = guessedCharacters.indexOf(activeCharacter);
+      const index = guessedCharacters.findIndex((c) => c.id === character.id);
       const updatedGuessedCharacters =
         index > -1
-          ? guessedCharacters.toSpliced(index, 1, activeCharacter)
-          : [...guessedCharacters, activeCharacter];
+          ? guessedCharacters.toSpliced(index, 1, character)
+          : [...guessedCharacters, character];
 
-      // TODO: set another active character
       set({ guessedCharacters: updatedGuessedCharacters });
 
       return isGuessed ? GuessResult.SUCCESS : GuessResult.FAILED;

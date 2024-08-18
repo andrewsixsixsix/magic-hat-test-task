@@ -30,14 +30,18 @@ export default function HomeTab() {
   const styles = getStyles(colors);
 
   const activeCharacter = useActiveCharacter();
-  const { guessCharacterHouse } = useCharacterActions();
+  const { getRandomCharacter, guessCharacterHouse } = useCharacterActions();
   const { incrementSuccess, incrementFailed } = useScoreActions();
 
   const [isRefreshing, setIsRefreshing] = useState(false);
 
-  const onRefresh = () => {};
+  const onRefresh = async () => {
+    setIsRefreshing(true);
+    await getRandomCharacter();
+    setIsRefreshing(false);
+  };
 
-  const guess = (house: TCharacterHouse) => {
+  const guess = async (house: TCharacterHouse) => {
     if (isRefreshing) {
       return;
     }
@@ -52,6 +56,7 @@ export default function HomeTab() {
         incrementFailed();
         break;
     }
+    await getRandomCharacter();
   };
 
   return (

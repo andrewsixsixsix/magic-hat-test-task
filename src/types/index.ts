@@ -5,8 +5,10 @@ export type TCharacterHouse =
   | "Slytherin"
   | "";
 
+export type TCharacterId = string;
+
 export interface ICharacter {
-  id: string;
+  id: TCharacterId;
   name: string;
   house: TCharacterHouse;
   dateOfBirth: string | null;
