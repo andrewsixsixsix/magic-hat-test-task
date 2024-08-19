@@ -17,7 +17,7 @@ My implementation of a [test task](https://github.com/MaksymZhuravel/magic-hat-t
 
 ### Demo
 
-Watch a [video](https://drive.google.com/drive/folders/1WRtKC28TjVIMo8hAs_LuG2s6O12Hiqc5?usp=drive_link)
+Watch a [video]([https://drive.google.com/drive/folders/1WRtKC28TjVIMo8hAs_LuG2s6O12Hiqc5?usp=drive_link](https://drive.google.com/drive/folders/1WRtKC28TjVIMo8hAs_LuG2s6O12Hiqc5?usp=sharing))
 demonstrating app's functionality
 
 ### Screenshots
