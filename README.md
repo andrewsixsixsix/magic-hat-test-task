@@ -1,7 +1,5 @@
 # MagicHat
 
----
-
 My implementation of a [test task](https://github.com/MaksymZhuravel/magic-hat-test-task) for Mobile Developer role
 
 ### Features
