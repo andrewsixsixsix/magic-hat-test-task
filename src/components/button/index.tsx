@@ -7,6 +7,7 @@ interface ButtonProps extends PressableProps {
 
 export const Button = ({ children, style, ...props }: ButtonProps) => (
   <Pressable
+    accessibilityRole={"button"}
     style={({ pressed }) => ({
       opacity: pressed ? 0.6 : 1,
       ...style,
