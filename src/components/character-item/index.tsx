@@ -27,7 +27,7 @@ export const CharacterItem = memo(
     onCharacterPress,
     onReloadPress,
   }: CharacterItemProps) => (
-    <View style={styles.container}>
+    <View style={styles.container} testID={"character-item"}>
       <Button style={styles.info} onPress={onCharacterPress}>
         <Image
           source={character.image || DEFAULT_CHARACTER_IMAGE}
@@ -46,7 +46,10 @@ export const CharacterItem = memo(
       ) : (
         <View style={styles.icons}>
           {isActive ? null : (
-            <Button onPress={() => onReloadPress(character)}>
+            <Button
+              accessibilityRole={"imagebutton"}
+              onPress={() => onReloadPress(character)}
+            >
               <Ionicons name="reload" size={sw(24)} color={colors.accent} />
             </Button>
           )}
